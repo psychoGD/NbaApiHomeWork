@@ -48,6 +48,15 @@ namespace NbaApi.ViewModels
             }
         }
 
+        private Response selectedTeam;
+
+        public Response SelectedTeam
+        {
+            get { return selectedTeam; }
+            set { selectedTeam = value;OnPropertyChanged(); }
+        }
+
+
         List<Response> result = null;
         List<Player> playersResult = null;
         public HomeViewModel()
@@ -56,7 +65,7 @@ namespace NbaApi.ViewModels
         }
 
         public RelayCommand SelectPageCommand { get; set; }
-
+        public RelayCommand SelectedTeamChangedCommand { get; set; }
         public void LoadData()
         {
             SelectedPageNo = new PageNo
@@ -106,6 +115,10 @@ namespace NbaApi.ViewModels
             {
                 var no = SelectedPageNo.No;
                 AllTeams = new ObservableCollection<Response>(result.Skip((no - 1) * 10).Take(10));
+            });
+            SelectedTeamChangedCommand = new RelayCommand((o) =>
+            {
+                
             });
 
         }

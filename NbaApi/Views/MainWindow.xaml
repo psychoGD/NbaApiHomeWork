@@ -8,14 +8,19 @@
         Title="MainWindow" Height="450" Width="800" Background="Black">
     <StackPanel>
         <ListView ItemsSource="{Binding AllTeams,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                      BorderThickness="6"
+                      BorderThickness="6"  SelectedItem="{Binding SelectedTeam}"
                     >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding SelectedCarChangedCommand}" CommandParameter="{Binding SelectedTeam}"  ></i:InvokeCommandAction>
                 </i:EventTrigger>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding SelectedTeamChangedCommand}"></i:InvokeCommandAction>
+                </i:EventTrigger>
             </i:Interaction.Triggers>
-
+            
+            
+            
             <ListBox.Template>
                 <ControlTemplate TargetType="ListBox">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderBrush}">
